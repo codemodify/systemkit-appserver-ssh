@@ -1,5 +1,5 @@
-github.com/codemodify/systemkit-appserver v1.7.8 h1:IlBtuKVPWEWx9qiIGu1TTBr/bDxr/HUDIE7g32eHymI=
-github.com/codemodify/systemkit-appserver v1.7.8/go.mod h1:VJBVIgxMncYBJYSC9GAK5heqEPxA/vFQRT4yeAND87k=
+github.com/codemodify/systemkit-appserver v1.7.9 h1:yrOyGbrfP3otwJqR800QngXnGxrNnLwoALVvTi4FYmk=
+github.com/codemodify/systemkit-appserver v1.7.9/go.mod h1:VJBVIgxMncYBJYSC9GAK5heqEPxA/vFQRT4yeAND87k=
 github.com/codemodify/systemkit-cryptography-gocrypto v1.8.0 h1:Cg5Xg0L6TLxlQFWXaVBy1Wcj800SKhhPVNHl1UQQe4I=
 github.com/codemodify/systemkit-cryptography-gocrypto v1.8.0/go.mod h1:iqD6+9fnpmW89irBaXuX21bpvaZ6vXOzLlVmt4DyKAE=
 github.com/codemodify/systemkit-helpers-reflection v1.7.9 h1:vPsYvbOiEZHT+rpoXlRx14IvzsKEAkYy7Aw2QEjF/G0=
