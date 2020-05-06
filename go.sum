@@ -1,11 +1,11 @@
 github.com/codemodify/systemkit-appserver v1.7.9 h1:yrOyGbrfP3otwJqR800QngXnGxrNnLwoALVvTi4FYmk=
 github.com/codemodify/systemkit-appserver v1.7.9/go.mod h1:VJBVIgxMncYBJYSC9GAK5heqEPxA/vFQRT4yeAND87k=
-github.com/codemodify/systemkit-cryptography-gocrypto v1.8.1 h1:9xfhbUd1drjepO0Y5GWrGRZSO9ATmgk6tAK9lP4U2D0=
-github.com/codemodify/systemkit-cryptography-gocrypto v1.8.1/go.mod h1:GRIelV17nEHgpluyHkZY9742s3mOcsanNzgCBfYafjI=
+github.com/codemodify/systemkit-cryptography-gocrypto v1.8.2 h1:RTKuuvbws3s+1Zn6SjJcVuBYwlvaVo2/LmbxzF8BhII=
+github.com/codemodify/systemkit-cryptography-gocrypto v1.8.2/go.mod h1:O3rl7USo1QozIdcm4l2/HAbmYRBii6LTDOaso2DfsII=
 github.com/codemodify/systemkit-helpers-reflection v1.7.9 h1:vPsYvbOiEZHT+rpoXlRx14IvzsKEAkYy7Aw2QEjF/G0=
 github.com/codemodify/systemkit-helpers-reflection v1.7.9/go.mod h1:HunZSrygIcl5IBmnWAYoDoqvFRVu7GIUvC0/scCfPzY=
-github.com/codemodify/systemkit-logging v1.8.2 h1:mLirYlQSczNJVh61/Q300AsRJfzmGzqG+sydPxFtCU4=
-github.com/codemodify/systemkit-logging v1.8.2/go.mod h1:29Zc9P/MnY2bgenJU9aoDszUef+Xf40b3ajtusTBC1Q=
+github.com/codemodify/systemkit-logging v1.8.4 h1:nkbj0VpnRnpI4PE4w9HNUv/ySO3A/1Y9LVeT9j+ZvGM=
+github.com/codemodify/systemkit-logging v1.8.4/go.mod h1:29Zc9P/MnY2bgenJU9aoDszUef+Xf40b3ajtusTBC1Q=
 github.com/gorilla/mux v1.7.4 h1:VuZ8uybHlWmqV03+zRzdwKL4tUnIp1MAQtp1mIFE1bc=
 github.com/gorilla/mux v1.7.4/go.mod h1:DVbg23sWSpFRCP0SfiEN6jmj59UnW/n46BH5rLB71So=
 golang.org/x/crypto v0.0.0-20190308221718-c2843e01d9a2/go.mod h1:djNgcEr1/C05ACkg1iLfiJU5Ep61QUkGW8qpdssI0+w=
