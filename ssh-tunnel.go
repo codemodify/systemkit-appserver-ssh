@@ -11,7 +11,6 @@ import (
 	"github.com/codemodify/systemkit-cryptography-gocrypto/ssh"
 	"github.com/gorilla/mux"
 
-	reflection "github.com/codemodify/systemkit-helpers-reflection"
 	logging "github.com/codemodify/systemkit-logging"
 )
 
@@ -59,7 +58,7 @@ func (thisRef *SSHTunnelServer) RunOnExistingListenerAndRouter(listener net.List
 	for {
 		connection, err := listener.Accept()
 		if err != nil {
-			logging.Errorf("JM-SSH: failed to accept incoming connection: %s, from %s", err, reflection.GetThisFuncName())
+			logging.Errorf("JM-SSH: failed to accept incoming connection: %s", err.Error())
 
 			continue
 		}
@@ -74,7 +73,7 @@ type customResponseWriter struct {
 }
 
 func (thisRef *customResponseWriter) Write(data []byte) (int, error) {
-	logging.Tracef("JM-SSH: sending back %d bytes, from %s", len(data), reflection.GetThisFuncName())
+	logging.Tracef("JM-SSH: sending back %d bytes", len(data))
 
 	return thisRef.sshChannel.Write(data)
 }
@@ -83,12 +82,12 @@ func (thisRef *SSHTunnelServer) runSSH(connection net.Conn) {
 	// Before use, a handshake must be performed on the incoming connection
 	sshServerConnection, chans, reqs, err := ssh.NewServerConn(connection, thisRef.sshServerConfig)
 	if err != nil {
-		logging.Errorf("JM-SSH: failed to handshake: %s, from %s", err, reflection.GetThisFuncName())
+		logging.Errorf("JM-SSH: failed to handshake: %s", err)
 
 		return
 	}
 
-	logging.Infof("JM-SSH: Connection %s, from %s", sshServerConnection.RemoteAddr().String(), reflection.GetThisFuncName())
+	logging.Infof("JM-SSH: Connection %s", sshServerConnection.RemoteAddr().String())
 
 	// The incoming Request channel must be serviced.
 	go ssh.DiscardRequests(reqs)
@@ -102,12 +101,12 @@ func (thisRef *SSHTunnelServer) runSSH(connection net.Conn) {
 
 		channel, _, err := newChannel.Accept()
 		if err != nil {
-			logging.Errorf("JM-SSH: could not accept channel: %v, from %s", err, reflection.GetThisFuncName())
+			logging.Errorf("JM-SSH: could not accept channel: %v", err.Error())
 			break
 		}
 
 		go func(ch ssh.Channel) {
-			logging.Tracef("JM-SSH: newChannel.Accept(), from %s", reflection.GetThisFuncName())
+			logging.Tracef("JM-SSH: newChannel.Accept()")
 
 			defer ch.Close()
 
@@ -116,37 +115,37 @@ func (thisRef *SSHTunnelServer) runSSH(connection net.Conn) {
 				len, err := ch.Read(data)
 				if err != nil {
 					if strings.Compare(err.Error(), "EOF") == 0 {
-						logging.Infof("JM-SSH: TRANSFER-FINISHED: %v, from %s", err, reflection.GetThisFuncName())
+						logging.Infof("JM-SSH: TRANSFER-FINISHED: %v", err)
 						break
 					} else {
-						logging.Errorf("JM-SSH: DATA-ERROR: %v, from %s", err, reflection.GetThisFuncName())
+						logging.Errorf("JM-SSH: DATA-ERROR: %v", err)
 						break
 					}
 				}
 
 				data = data[0:len]
-				logging.Debugf("JM-SSH: DATA-TO-PASS-ON: %s, from %s", string(data), reflection.GetThisFuncName())
+				logging.Debugf("JM-SSH: DATA-TO-PASS-ON: %s", string(data))
 
 				apiEndpoing := appServer.APIEndpoint{}
 				err = json.Unmarshal(data, &apiEndpoing)
 				if err != nil {
-					logging.Errorf("JM-SSH: Missing ROUTE: %s, from %s", err.Error(), reflection.GetThisFuncName())
+					logging.Errorf("JM-SSH: Missing ROUTE: %s", err.Error())
 				}
 
 				// Make `http.Request`
 				request, err := http.NewRequest("POST", apiEndpoing.Value, bytes.NewBuffer(data))
 				if err != nil {
-					logging.Errorf("JM-SSH: SSH-DATA-ERROR: %s, from %s", err.Error(), reflection.GetThisFuncName())
+					logging.Errorf("JM-SSH: SSH-DATA-ERROR: %s", err.Error())
 					break
 				}
 
 				route := thisRef.router.Get(apiEndpoing.Value)
 				if route == nil {
-					logging.Errorf("JM-SSH: Missing ROUTE: %s, from %s", apiEndpoing.Value, reflection.GetThisFuncName())
+					logging.Errorf("JM-SSH: Missing ROUTE: %s", apiEndpoing.Value)
 					break
 				}
 
-				logging.Errorf("JM-SSH: ServeHTTP(), from %s", reflection.GetThisFuncName())
+				logging.Errorf("JM-SSH: ServeHTTP()")
 				route.GetHandler().ServeHTTP(&customResponseWriter{sshChannel: ch}, request)
 
 				break
